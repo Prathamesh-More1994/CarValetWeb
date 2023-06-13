@@ -1,0 +1,38 @@
+.container {
+  // -webkit-box-align: center;
+  // align-items: center;
+  // display: block;
+  margin: 15% 200px 0px 110px;
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    margin: 50% -5px;
+    align-items: flex-end;
+  }
+
+  .col-sm-9{
+    margin-bottom: 10px;
+  }
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: grayscale(80%);
+  -webkit-filter: grayscale(80%);
+}
+
+// /* Add some content at the bottom of the video/page */
+// .content {
+//   position: fixed;
+//   bottom: 0;
+//   background: rgba(0, 0, 0, 0.5);
+//   color: #f1f1f1;
+//   width: 100%;
+//   padding: 20px;
+// }

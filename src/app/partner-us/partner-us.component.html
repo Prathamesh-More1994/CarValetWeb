@@ -1,0 +1,365 @@
+<div class="container mt-5">
+  <!-- {{partnerWithUsForm.value|json}}
+
+  {{companyModel |json}} -->
+  <div id="stepper1" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Become partners</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Services Offered</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Working Hours</span>
+        </button>
+      </div>
+
+
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-4">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">4</span>
+          <span class="bs-stepper-label">Location</span>
+        </button>
+      </div>
+
+
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-5">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">5</span>
+          <span class="bs-stepper-label">Review</span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+      <div>
+
+        <div id="test-l-1" class="content">
+          <div>
+            <h3>Become Partner with us!</h3>
+            <div class="form-group" [formGroup]="partnerWithUsForm">
+              <div class="row">
+                <div class="col-4">
+                  <label for="exampleInputEmail1">Your Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your Name" formControlName="name" />
+                </div>
+                <!-- <div class="col-4">
+                  <label for="exampleInputEmail1">Last Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your Last Name" formControlName="lname"  />
+                </div> -->
+                <div class="col-4">
+                  <label for="exampleInputEmail1">Email</label>
+                  <input type="email" class="form-control" placeholder="Enter Email" formControlName="email" />
+                </div>
+                <div class="col-4">
+                  <label for="exampleInputEmail1">Mobile</label>
+                  <input type="tel" class="form-control" placeholder="Enter your Mobile" formControlName="mobile" />
+                </div>
+              </div>
+              <div class="row">
+
+
+                <div class="col-4">
+                  <label for="exampleInputEmail1">Address</label>
+                  <input type="text" class="form-control" placeholder="Enter Address" formControlName="address" />
+                </div>
+                <div class="col-4">
+                  <label for="exampleInputEmail1">City</label>
+                  <input type="text" class="form-control" placeholder="Enter City" formControlName="city" ngModel />
+                </div>
+                <div class="col-4">
+                  <label for="exampleInputtext1">Name of Business</label>
+                  <input type="text" class="form-control" placeholder="Enter your Business name"
+                    formControlName="businessName" />
+                </div>
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-4"><label for="exampleInputtext1">Password</label>
+                  <input type="password" class="form-control" placeholder="Enter your Password"
+                    formControlName="password" ngModel />
+                </div>
+
+              </div>
+
+            </div>
+            <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+
+          </div>
+        </div>
+        <div id="test-l-2" class="content">
+          <div class="form-group">
+            <h3>Services Offered!</h3>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="w-10"><b>#</b></th>
+                  <th scope="col" class="w-20"><b>Service Name</b></th>
+                  <th scope="col" class="w-20"><b>Price</b></th>
+                  <th scope="col" class="w-10"><b>Estimated Time</b></th>
+                  <th scope="col" class="w-40"><b>Description</b></th>
+
+                  <th scope="col" class="w-10"><b>Action</b></th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let service of servicesList;let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{service?.serviceName}}</td>
+                  <td>{{service?.price}}</td>
+                  <td>{{service?.estimatedTime}}</td>
+                  <td>{{service?.description}}</td>
+                  <td><button>Delete</button></td>
+
+                </tr>
+                <tr *ngIf="!servicesList?.length">
+                  <td colspan="6" style="text-align: center;" *ngIf="true">No Services</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <button class="btn btn-primary" (click)="addService(template)">Add</button>
+            <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+            <!-- 
+            <div id="test-l-3" class="content text-center">
+            
+              <h3>Review</h3>
+          <button type="submit" class="btn btn-primary mt-5" style="float:right" (click)= "saveData()">Submit</button>
+              
+            
+          
+          </div> -->
+
+
+            <!-- Modal popup starts -->
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Add Services</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body" style="height:300px" [formGroup]="serviceOfferForm">
+
+                <div class="row">
+                  <div class="col-6">
+                    <label for="exampleInputEmail1">Service Name</label>
+                    <input type="text" formControlName="serviceName" class="form-control" placeholder="Service Name" />
+                  </div>
+                  <div class="col-6">
+                    <label for="exampleInputEmail1">Price</label>
+                    <input type="number" formControlName="price" class="form-control" placeholder="Price" />
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="exampleInputEmail1">Estimated Time (Minutes)</label>
+                    <input type="number" formControlName="estimatedTime" class="form-control" placeholder="Time" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <label for="exampleFormControlTextarea1">Service Description</label>
+                    <textarea formControlName="description" class="form-control" style="height: 100px"
+                      placeholder="Description"></textarea>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="saveService()">Save</button> &nbsp;
+                <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+
+        <!-- Modal popup ends -->
+
+        <div id="test-l-3" class="content text-center">
+          <h3>Manage Working Hours</h3>
+          <div class="form-group">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">From</th>
+                  <th scope="col">To</th>
+                  <th scope="col">Available</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of days; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item?.day}}</td>
+                  <td>
+                    <input type="time" min="09:00" max="18:00" (change)="changeTime('isFrom',i, $event)"
+                      [value]="item.from">
+                  </td>
+                  <td>
+                    <input type="time" min="09:00" max="18:00" (change)="changeTime('isTo',i,$event)" [value]="item.to">
+                  </td>
+                  <td>
+                    <input type="checkbox" (change)="checkAvailable($event, i)" [checked]="item.isAvailable">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+        </div>
+        <div id="test-l-4" class="content text-center">
+          <h3>Add you location</h3>
+          <div class="form-group">
+            <google-map
+  
+            #myGoogleMap
+          
+            height="500px"
+            width="100%"
+            [zoom]="zoom"
+            [center]="center"
+            [options]="options"
+            (mapClick)="eventHandler($event,'mapClick')"
+            (mapDblclick)="eventHandler($event,'mapDblclick')"
+            (mapDrag)="eventHandler($event,'mapDrag')"
+            (mapDragend)="eventHandler($event,'mapDragend')"
+            (mapRightclick)="eventHandler($event,'mapRightclick')"
+            (positionChanged)="eventHandler($event,'marker_positionChanged')"
+            (zoomChanged)="eventHandler($event,'zoomChanged')"
+          >
+            <map-marker
+              #markerElem="mapMarker"
+              *ngFor="let marker of markers"
+              [position]="marker.position"
+              [label]="marker.label"
+              [title]="marker.title"
+              [options]="marker.options"
+              (mapClick)="openInfo(markerElem, marker.info)"
+            >
+            </map-marker>
+          
+            <map-info-window>{{ infoContent }}</map-info-window>
+          </google-map>
+          <button (click)="removeMarker()">Remove</button>
+          <button (click)="zoomIn()">Zoom in</button>
+          <button (click)="zoomOut()">Zoom out</button>
+          <!-- <button (click)="logCenter()">Get Location</button> -->
+          </div>
+
+          <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+        </div>
+        <div id="test-l-5" class="content text-center">
+
+          <h3>Final Review</h3>
+          <div class="card" *ngIf="(partnerWithUsForm.value.name!='' && servicesList.length!=0)">
+            <div class="card w-60 mt-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Name</label>
+                    {{partnerWithUsForm.value.name}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Email</label>
+                    {{partnerWithUsForm.value.email}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Mobile</label>
+                    {{partnerWithUsForm.value.mobile}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Address</label>
+                    {{partnerWithUsForm.value.address}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">City</label>
+                    {{partnerWithUsForm.value.city}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Business Name</label>
+                    {{partnerWithUsForm.value.businessName}}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="card w-60 mt-2">
+              <div class="card-body">
+                <h5 class="card-title">Services Offered</h5>
+                <div *ngFor="let service of servicesList">
+                  <div class="row">
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Service Name</label>
+                      {{service.serviceName}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Price</label>
+                      {{service.price}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Estimated Time (Minutes)</label>
+                      {{service.estimatedTime}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Description</label>
+                      {{service.description}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card w-60 mt-2">
+              <div class="card-body">
+                <h5 class="card-title">Working Hours</h5>
+                <div *ngFor="let dayObj of days;">
+                  <div class="row" *ngIf="dayObj.isAvailable">
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Day</label>
+                      {{dayObj.day}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">From</label>
+                      {{dayObj.from}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">To</label>
+                      {{dayObj.to}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-5 mb-2" style="float:right"
+              (click)="saveData()">Submit</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

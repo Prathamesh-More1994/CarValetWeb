@@ -1,0 +1,87 @@
+<div class="main-container" [formGroup]="bookingForm">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <h6> Select Valet <span class="text-danger"><b> *</b></span> </h6>
+            <select class="form-select form-select-lg mb-3" formControlName="staff_selection"
+                aria-label=".form-select-lg example">
+                <option selected value="">Select Valet</option>
+                <option *ngFor="let staff of staffList" value="{{staff.staffId}}">{{staff.name}} <div class="float-end">{{staff.expertise}}</div></option>
+                <div *ngIf="formValidator['staff_selection'].touched && formValidator['staff_selection'].invalid"
+                    class="show-error">
+                    <div
+                        *ngIf="formValidator['staff_selection'].errors?.['required'] && formValidator['staff_selection'].dirty">
+                        Please
+                        select Valet
+                    </div>
+                </div>
+            </select>
+        </div>
+    </div>
+    <div class="row mx-auto justify-content-md-center" style="border: aliceblue;">
+        <div class="col-md-5">
+            <!-- <h6>Book Appointments</h6> -->
+            <article class="calendar-wrapper">
+                <igx-calendar [weekStart]="1" [hasHeader]="false" formControlName="appointment_date"
+                    (selected)="changeDate($event)">
+                </igx-calendar>
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <h6> Select Slots <span class="text-danger"><b> *</b></span> </h6>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr *ngFor="let item of timeSlot; let i = index">
+                        <!-- {{i}} -->
+                        <td> <button type="button" data-toggle="tooltip" data-placement="top" title=""
+                                [ngClass]="item.slot_A.isAvailable ? 'col btn btn btn-outline-success' : 'col btn btn-danger'"
+                                [disabled]="!item?.slot_A?.isAvailable"
+                                (click)="selectSlot(item?.slot_A?.id,item?.slot_A?.value)">{{item?.slot_A?.value}}</button>
+                        </td>
+                        <td> <button
+                                [ngClass]="item.slot_B.isAvailable ? 'col btn btn btn-outline-success' : 'col btn btn-danger'"
+                                [disabled]="!item?.slot_B?.isAvailable"
+                                (click)="selectSlot(item?.slot_B?.id,item?.slot_B?.value)">{{item?.slot_B?.value}}</button>
+                        </td>
+                        <td> <button
+                                [ngClass]="item.slot_C.isAvailable ? 'col btn btn btn-outline-success' : 'col btn btn-danger'"
+                                [disabled]="!item?.slot_C?.isAvailable"
+                                (click)="selectSlot(item?.slot_C?.id,item?.slot_C?.value)">{{item?.slot_C?.value}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <div class='box green'></div>&nbsp;Available Appointments
+            </div>
+            <br>
+            <div>
+                <div class='box red'></div>&nbsp; Booked Appointments
+            </div>
+            <br>
+            <div>
+                <div class='box grey'></div>&nbsp;Not Available
+            </div>
+            <button type="submit" class="btn btn-outline-primary" (click)="bookAppointment(template)"
+                style="float: right;">Book
+                Appointment</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Payment</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <app-payment [service]="service" [user]="user" [company]="company"></app-payment>
+
+    </div>
+</ng-template>

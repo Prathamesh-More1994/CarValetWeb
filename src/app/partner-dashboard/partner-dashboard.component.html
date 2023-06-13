@@ -1,0 +1,330 @@
+<div class="container">
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary  h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold text-primary text-uppercase mb-1">
+                                Earnings (Monthly)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span *ngIf="transactionData">{{transactionData.monthlyRevenue}}</span>
+                                <span *ngIf="!transactionData">0</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Annual) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success  h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold text-success text-uppercase mb-1">
+                                Earnings (Annual)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span *ngIf="transactionData">{{transactionData.yearlyRevenue }}</span>
+                                <span *ngIf="!transactionData">0</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info  h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold text-info text-uppercase mb-1">Completed Appointment
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        <span>{{completedCount}}</span>%
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                            [style.width]="completedCount+'%'" attr.aria-valuenow={{completedCount}}
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Task Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning  h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
+                                Pending Appointment</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{pendingCount}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- chart -->
+
+    <div class="col-xl-12 col-lg-12">
+        <div class="card mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas
+                    (chartClick)="chartClicked($event)"
+                    (chartHover)="chartHovered($event)"
+                    [type]="lineChartType"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [legend]="lineChartLegend"
+                    [options]="lineChartOptions"
+                    baseChart
+                    height="50"
+                >
+                </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- char end -->
+    <div class="row">
+        <div class="app">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12">
+                        <div class="bg-white">
+                            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation"> <button class="nav-link active"
+                                        id="faq_tab_1-tab" data-bs-toggle="tab" data-bs-target="#faq_tab_1"
+                                        type="button" role="tab" aria-controls="faq_tab_1" aria-selected="true">
+                                        <div class="d-flex flex-column lh-lg"> <i class='bx bxs-plane-alt'></i>
+                                            <span>Staff</span>
+                                        </div>
+                                    </button> </li>
+                                <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_2-tab"
+                                        data-bs-toggle="tab" data-bs-target="#faq_tab_2" type="button" role="tab"
+                                        aria-controls="faq_tab_2" aria-selected="false">
+                                        <div class="d-flex flex-column lh-lg"> <i class='bx bxs-shopping-bag'></i>
+                                            <span>Reviews</span>
+                                        </div>
+                                    </button> </li>
+                                <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_3-tab"
+                                        data-bs-toggle="tab" data-bs-target="#faq_tab_3" type="button" role="tab"
+                                        aria-controls="faq_tab_3" aria-selected="false">
+                                        <div class="d-flex flex-column lh-lg"> <i class='bx bx-check-circle'></i>
+                                            <span>Transactions</span>
+                                        </div>
+                                    </button> </li>
+                                <li class="nav-item" role="presentation"> <button class="nav-link" id="faq_tab_4-tab"
+                                        data-bs-toggle="tab" data-bs-target="#faq_tab_4" type="button" role="tab"
+                                        aria-controls="faq_tab_4" aria-selected="false">
+                                        <div class="d-flex flex-column lh-lg"> <i class='bx bxs-plane-alt'></i>
+                                            <span>Add New Staff</span>
+                                        </div>
+                                    </button> </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="faq_tab_1" role="tabpanel"
+                                    aria-labelledby="faq_tab_1-tab">
+                                    <div class="container p-3 scroll-y">
+                                        <!-- TODO : show staff currently in the company -->
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="w-10"><b>#</b></th>
+                                                    <th scope="col" class="w-20"><b>Staff Name</b></th>
+                                                    <th scope="col" class="w-40"><b>Mobile</b></th>
+                                                    <th scope="col" class="w-10"><b>Shift</b></th>
+                                                    <th scope="col" class="w-10"><b>Expertise</b></th>
+                                                    <th scope="col" class="w-15"><b>Action</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr *ngFor="let item of staffList; let i = index">
+                                                    <th scope="row">{{i+1}}</th>
+                                                    <td>{{item.name}}</td>
+                                                    <td>{{item.mobile}}</td>
+                                                    <td><span *ngFor="let shift of item.shift;let j=index">
+                                                            <span *ngIf="j>=1">,</span>
+                                                            {{shift.day}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        {{item.expertise}}
+                                                    </td>
+                                                    <td *ngIf="true"><Button class="btn btn-danger btn-sm"
+                                                            [disabled]="false">
+                                                            Delete
+                                                        </Button></td>
+
+
+
+                                                </tr>
+
+                                                <tr>
+
+                                                    <td colspan="6" style="text-align: center;"
+                                                        *ngIf="!staffList?.length">No Appointments</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="faq_tab_2" role="tabpanel"
+                                    aria-labelledby="faq_tab_2-tab">
+                                    <div class="container p-3">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="w-10"><b>#</b></th>
+                                                    <th scope="col" class="w-20">Customer Name</th>
+                                                    <th scope="col" class="w-20">Staff Name</th>
+                                                    <th scope="col" class="w-40"><b>Review</b></th>
+                                                    <th scope="col" class="w-20"><b>Rating</b></th>
+                                                    <!-- <th scope="col" class="w-10"><b>Date</b></th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="appointmentData.length > 0">
+
+                                                <tr *ngFor=" let itemData of appointmentData; let i=index">
+
+                                                    <th scope="row">
+                                                        {{i+1}}
+                                                    </th>
+                                                    <td scope="row">
+                                                        {{itemData.customerName}}
+                                                    </td>
+                                                    <td>
+
+                                                        {{itemData.appointment.staff.name}}
+                                                    </td>
+                                                    <td *ngIf="itemData.appointment.comment">
+
+                                                        {{itemData.appointment.comment}}
+                                                    </td>
+                                                    <td *ngIf="!itemData.appointment.comment"> No Review</td>
+                                                    <td>
+                                                        <form *ngIf="itemData.appointment.rating" [formGroup]="form2"
+                                                            style="width: 50%;">
+                                                            <ngx-star-rating formControlName="ratings{{i}}"
+                                                                [id]="'ratings'" [disabled]="true">
+                                                            </ngx-star-rating>
+                                                        </form>
+
+                                                    </td>
+
+                                                    <!-- <td>{{item.createdDate|date}} </td> -->
+
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tbody *ngIf="appointmentData.length===0">
+                                                <tr>
+                                                    <td colspan="3" style="text-align: center;">No Data</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="faq_tab_3" role="tabpanel"
+                                    aria-labelledby="faq_tab_3-tab">
+                                    <div class="container p-3 mt-4">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="w-10"><b>#</b></th>
+                                                    <th scope="col" class="w-20"><b>Product Name</b></th>
+                                                    <th scope="col" class="w-40"><b>Amount</b></th>
+                                                    <th scope="col" class="w-10"><b>Date</b></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="transactionData">
+
+                                                <tr *ngFor="let item of transactionData.payments; let i = index">
+                                                    <th scope="row">{{i+1}}</th>
+                                                    <td>{{item.productName}}</td>
+                                                    <td>{{item.amount}}</td>
+                                                    <td>{{item.createdDate|date}} </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tbody *ngIf="!transactionData">
+                                                <tr>
+                                                    <td colspan="4" style="text-align: center;">No Data</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="faq_tab_4" role="tabpanel"
+                                    aria-labelledby="faq_tab_4-tab">
+                                    <div class="container p-3">
+                                        <app-manage-staff [company]="company"></app-manage-staff>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>

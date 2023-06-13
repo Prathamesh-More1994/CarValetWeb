@@ -1,0 +1,26 @@
+<!-- {{companyList|json}} -->
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Service Day</th>
+                    <th>Book</th>
+                    <!-- TODO:Price, Opening and closing hours,Services to be included -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companyList;index as i">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{company.companyName}}</td>
+                    <td>{{company.address}}</td>
+                    <td>{{company.serviceDay | date:'cccc'}}</td>
+                    <td><button class="btn btn-outline-success" (click)="bookAppointment(company)">Book</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<video autoplay="true" muted="muted" loop id="myVideo">
+    <source src="../../assets/video/CarValet.mp4" type="video/mp4">
+</video>
+
+<!-- <div class="inner-container">
+    <form class="d-flex align-items-center">
+
+        &nbsp;
+        <button class="btn btn-success" type="submit" (click)="search()">Search</button>
+    </form>
+</div> -->
+
+<div class="container justify-content-md-center position-fixed">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-7">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" />
+        </div>
+        <div class="col-sm-2" style="width: max-content;">
+            <button class="btn btn-primary" type="button" (click)="getLocation()">Find Location</button>
+        </div>
+        <div class="col-sm-1" style="width: max-content;">
+            <button class="btn btn-success" type="submit" (click)="search()">Search</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Navbar content -->
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Car Wash</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" *ngIf="!(isStaff || isPartnerLogin)" href="#">Home</a>
+        </li>
+        <!-- <li *ngIf="!isCustomerItem" class="nav-item"> -->
+        <li *ngIf="!(isLogin ||isPartnerLogin)" class="nav-item">
+          <a class="nav-link" (click)="router.navigate(['/partner-us'])">Partner With Us</a>
+        </li>
+        <li *ngIf="isCustomer" class="nav-item">
+          <a class="nav-link" (click)="router.navigate(['/appointment'])">View Appointment</a>
+        </li>
+        <li *ngIf="isStaff" class="nav-item">
+          <a class="nav-link" (click)="router.navigate(['/staff'])">View Appointment</a>
+        </li>
+        <li *ngIf="!(isLogin || isPartnerLogin)" class="nav-item">
+          <a class="nav-link" (click)="router.navigate(['/login'])">Sign Up or Login</a>
+        </li>
+        <li *ngIf="isLogin" class="nav-item">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+      <!-- <span class="navbar-text">
+            Navbar text with an inline element
+          </span> -->
+    </div>
+  </div>
+</nav>

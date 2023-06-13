@@ -1,0 +1,197 @@
+<div class="container">
+  <div id="stepper2" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Staff Details</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Shift Timings</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Review</span>
+        </button>
+      </div>
+
+    </div>
+    <div class="bs-stepper-content">
+      <form (ngSubmit)="onSubmit()">
+        <div id="test-l-1" class="content">
+
+
+          <h3>Staff Details</h3>
+          <div class="form-group" [formGroup]="staffDetailsForm">
+            <div class="row">
+              <div class="col-4">
+                <label for="exampleInputEmail1">Staff Name</label>
+                <input type="text" class="form-control" placeholder="Enter Staff Name" formControlName="name" />
+              </div>
+              <!-- <div class="col-4">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="text" class="form-control" placeholder="Enter your Last Name" />
+              </div> -->
+              <div class="col-4">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="text" class="form-control" placeholder="Enter Staff Email" formControlName="email" />
+              </div>
+              <div class="col-4">
+                <label for="exampleInputEmail1">Mobile</label>
+                <input type="text" class="form-control" placeholder="Enter Staff Mobile" formControlName="mobile" />
+              </div>
+            </div>
+            <div class="row">
+
+
+              <div class="col-4">
+                <label for="exampleInputEmail1">Address</label>
+                <input type="text" class="form-control" placeholder="Enter Staff Address" formControlName="address" />
+              </div>
+              <div class="col-4">
+                <label for="exampleInputEmail1">City</label>
+                <input type="text" class="form-control" placeholder="Enter Staff City" formControlName="city" />
+              </div>
+              <div class="col-4">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="password" class="form-control" placeholder="Set Staff Password"
+                  formControlName="password" />
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="exampleInputEmail1">Expertise</label>
+                <input type="text" class="form-control" placeholder="Staff Expertise" formControlName="expertise" />
+              </div>
+            </div>
+
+
+          </div>
+          <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+
+        </div>
+        <div id="test-l-2" class="content text-center">
+
+          <h3>Shift Timings</h3>
+          <div class="form-group">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">From</th>
+                  <th scope="col">To</th>
+                  <th scope="col">Availability</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of days; let i = index">
+                  <th scope="row">{{item.id}}</th>
+                  <td>{{item?.day}}</td>
+                  <td>
+                    <input type="time" min="09:00" max="18:00" (change)="changeTime('isFrom',i, $event)"
+                      [value]="item.from">
+                  </td>
+                  <td>
+                    <input type="time" min="09:00" max="18:00" (change)="changeTime('isTo',i,$event)" [value]="item.to">
+                  </td>
+                  <td>
+                    <input type="checkbox" (change)="checkAvailable($event, i)" [checked]="item.isAvailable">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button (click)="next()" style="float:right" class="btn btn-primary mt-2">Next</button>
+
+        </div>
+        <div id="test-l-3" class="content text-center">
+
+          <h3>Final Review</h3>
+          <div class="card" *ngIf="(staffDetailsForm.value.name!='' && staffDetailsForm.value.address!=''
+          && staffDetailsForm.value.city!='' && staffDetailsForm.value.mobile!=''
+          && staffDetailsForm.value.email!='' && staffDetailsForm.value.password!='')">
+
+            <div class="card w-60 mt-2">
+              <div class="card-body">
+                <h5 class="card-title">Staff Details</h5>
+
+                <div class="row">
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Name</label>
+                    {{staffDetailsForm.value.name}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Email</label>
+                    {{staffDetailsForm.value.email}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Mobile</label>
+                    {{staffDetailsForm.value.mobile}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Address</label>
+                    {{staffDetailsForm.value.address}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">City</label>
+                    {{staffDetailsForm.value.city}}
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Password</label>
+                    {{staffDetailsForm.value.password}}
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+            <div class="card w-60 mt-2">
+              <div class="card-body">
+
+                <h5 class="card-title">Working Hours</h5>
+                <div *ngFor="let dayObj of days;">
+                  <div class="row" *ngIf="dayObj.isAvailable">
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">Day</label>
+                      {{dayObj.day}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">From</label>
+                      {{dayObj.from}}
+                    </div>
+                    <div class="col-3">
+                      <label for="exampleInputEmail1">To</label>
+                      {{dayObj.to}}
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-5 mb-2" style="float:right"
+              (click)="saveData()">Submit</button>
+          </div>
+
+
+
+        </div>
+
+      </form>
+      <!-- <button type="submit" class="btn btn-primary mt-5" style="float:right" (click)= "saveData()">Submit</button> -->
+
+    </div>
+  </div>
+</div>

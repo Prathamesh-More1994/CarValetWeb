@@ -1,0 +1,21 @@
+<!-- {{company|json}} -->
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-3" *ngFor="let service of company.service">
+            <div class="card border-success my-3">
+                <div class="card-header bg-transparent border-success">{{service.name}}</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">{{service.name}}</h5>
+                    <p>Price : &nbsp;</p>
+                    <p class="card-text">{{service.price}}</p>
+                    <p>Estimated Time: &nbsp;</p>
+                    <p class="card-text">{{service.estimatedTime}}</p>
+                    <p>Description : &nbsp;</p>
+                    <p class="card-text">{{service.description}}</p>
+                </div>
+                <div class="card-footer bg-transparent border-success"><button class="btn btn btn-outline-success"
+                        (click)="selectService(service)">Select</button></div>
+            </div>
+        </div>
+    </div>
+</div>

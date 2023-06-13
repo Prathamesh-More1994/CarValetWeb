@@ -1,0 +1,22 @@
+p {
+  font-family: Lato;
+}
+
+button {
+  margin-top: 5px;
+}
+
+.active .bs-stepper-circle {
+  background-color: #000000;
+}
+
+.bs-stepper .step-trigger:focus {
+  color: #040404;
+  outline: 0;
+}
+
+.form-control:focus{
+  outline: 0px none #fff !important;
+  box-shadow: 0 0 0 0.25rem rgb(255 255 255) !important;
+  border-color: #222 !important;
+}
